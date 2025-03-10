@@ -1,0 +1,1167 @@
+<!DOCTYPE html>
+<html lang="en" style="scroll-behavior: smooth">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+
+    <!--====== Favicon Icon ======-->
+    <link rel="shortcut icon" href="\assets\img\Ascentt_logo.png" type="image/png" />
+
+    <title>PII Masking Tool</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.1.2/dist/tailwind.min.css" rel="stylesheet">
+
+    <!-- Icon -->
+    <link rel="stylesheet" href="assets/css/lineicons.css" />
+    <!-- Tailwind css -->
+    <link rel="stylesheet" href="assets/css/tailwindcss.css" />
+    <style>
+      #services {
+          position: relative;
+          padding: 20px;
+          color: #000; /* Text color to ensure readability */
+      }
+      .curved-bg {
+          position: absolute;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 50%;
+          border-bottom-left-radius: 50% 20%;
+          border-bottom-right-radius: 50% 20%;
+          z-index: -1; /* Ensure the background is behind the content */
+      }
+  </style>
+  </head>
+  <body>
+    <!-- Header Area wrapper Starts -->
+    <header id="header-wrap" class="relative">
+     <!-- Navbar Start -->
+     <div class="navigation fixed top-0 left-0 w-full z-30 duration-300">
+      <div class="container px-4">
+        <nav class="navbar py-2 navbar-expand-lg flex justify-between items-center relative duration-300">
+          <a class="navbar-brand" href="index.html">
+            <img src="assets/img/Ascentt_logo.png" alt="Logo" />
+          </a>
+          <button class="navbar-toggler focus:outline-none block lg:hidden">
+            <span class="toggler-icon block bg-gray-700 relative duration-300 h-[2px] w-[30px] my-[6px]"></span>
+            <span class="toggler-icon block bg-gray-700 relative duration-300 h-[2px] w-[30px] my-[6px]"></span>
+            <span class="toggler-icon block bg-gray-700 relative duration-300 h-[2px] w-[30px] my-[6px]"></span>
+          </button>
+          <div class="collapse navbar-collapse hidden lg:block duration-300 shadow absolute top-full left-0 mt-full bg-white z-20 px-5 py-3 w-full lg:static lg:bg-transparent lg:shadow-none" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto justify-center items-center lg:flex">
+              <li class="nav-item">
+                <a class="page-scroll nav-link active" href="#hero-area">Home</a>
+              </li>
+              <li class="nav-item">
+                <a class="page-scroll nav-link" href="#services">Services</a>
+              </li>
+              <li class="nav-item">
+                <a class="page-scroll nav-link" href="#feature">Feature</a>
+              </li>
+            </ul>
+          </div>
+          <div class="header-btn hidden sm:flex sm:justify-end sm:items-center sm:mr-16 lg:justify-start lg:mr-0">
+            <a class="text-orange-500 border border-orange-500 px-10 py-3 rounded-full duration-300 hover:bg-orange-500 hover:text-white mr-4" href="#feature">FAQ</a>
+            <a class="text-orange-500 border border-orange-500 px-10 py-3 rounded-full duration-300 hover:bg-orange-500 hover:text-white mr-4" href="#login">Login</a>
+            <a class="text-orange-500 border border-orange-500 px-10 py-3 rounded-full duration-300 hover:bg-orange-500 hover:text-white" href="#signup">Sign Up</a>
+        </div>      
+        </nav>
+      </div>
+    </div>
+    <!-- Navbar End -->
+    </header>
+    <!-- Header Area wrapper End -->
+
+    <!-- Hero Area Start -->
+    <section id="hero-area" class="pt-48 pb-10 bg-white">
+      <div class="container px-4">
+        <div class="flex justify-between">
+         
+          <div class="w-full text-center flex space-x-4">
+            <div class="text-center lg:w-1/2">
+              <img class="img-fluid mx-auto" src="assets\img\6020053.jpg" alt="" />
+            </div>
+            <div class="flex justify-center items-center min-h-screen bg-white lg:w-1/2">
+              <div class="p-6 max-w-xl w-full bg-white rounded-lg shadow-lg">
+                  <h1 class="text-xl font-bold mb-4">PII Masking Tool</h1>
+          
+                  <div class="border-dashed border-2 border-gray-400 rounded-lg p-6 text-center cursor-pointer" id="dropArea">
+                      <input type="file" id="fileInput" class="hidden" multiple>
+                      <label for="fileInput" class="cursor-pointer">
+                          <div class="flex flex-col items-center">
+                              <span class="text-gray-600">📂 Choose or Drag & Drop files</span>
+                              <small class="text-gray-500">(CSV, XLSX, MP4, MOV, JPEG, PNG, PDF, DOCX)</small>
+                          </div>
+                      </label>
+                  </div>
+          
+                  <h2 class="mt-4 text-lg font-semibold">Uploaded Files</h2>
+                  <ul id="fileList" class="mt-2 space-y-2"></ul>
+          
+                  <div id="dropdownsSection" class="hidden mt-4">
+                      <div class="mt-4">
+                          <label for="maskingType" class="block font-semibold">Select Masking Type</label>
+                          <select id="maskingType" class="w-full p-2 mt-2 border rounded">
+                          </select>
+                      </div>
+          
+                      <div class="mt-4">
+                          <label for="piiCategory" class="block font-semibold">Select PII Category</label>
+                          <div class="relative">
+                              <button id="piiDropdownBtn" class="w-full p-2 border rounded bg-white text-gray-700 flex justify-between items-center">
+                                  <span>Select PII Categories</span>
+                                  <span id="piiDropdownArrow" class="ml-2">▼</span>
+                              </button>
+                      
+                              <div id="piiDropdownMenu" class="absolute hidden z-10 w-full mt-2 bg-white border rounded shadow-lg">
+                                  <div class="flex items-center p-2">
+                                      <input type="checkbox" id="selectAll" class="mr-2" />
+                                      <label for="selectAll" class="text-gray-700">Select All</label>
+                                  </div>
+                                  <div class="p-2">
+                                      <div class="flex items-center">
+                                          <input type="checkbox" id="ssn" class="mr-2" value="ssn" />
+                                          <label for="ssn" class="text-gray-700">Social Security Number (SSN)</label>
+                                      </div>
+                                      <div class="flex items-center">
+                                          <input type="checkbox" id="tin" class="mr-2" value="tin" />
+                                          <label for="tin" class="text-gray-700">Tax Identification Number</label>
+                                      </div>
+                                      <div class="flex items-center">
+                                          <input type="checkbox" id="drivers_license" class="mr-2" value="drivers_license" />
+                                          <label for="drivers_license" class="text-gray-700">Driver's License Number</label>
+                                      </div>
+                                      <div class="flex items-center">
+                                          <input type="checkbox" id="financial_account" class="mr-2" value="financial_account" />
+                                          <label for="financial_account" class="text-gray-700">Financial Account Number</label>
+                                      </div>
+                                      <div class="flex items-center">
+                                          <input type="checkbox" id="medical_info" class="mr-2" value="medical_info" />
+                                          <label for="medical_info" class="text-gray-700">Medical Information</label>
+                                      </div>
+                                      <div class="flex items-center">
+                                          <input type="checkbox" id="health_insurance" class="mr-2" value="health_insurance" />
+                                          <label for="health_insurance" class="text-gray-700">Health Insurance Information</label>
+                                      </div>
+                                      <div class="flex items-center">
+                                          <input type="checkbox" id="citizenship_status" class="mr-2" value="citizenship_status" />
+                                          <label for="citizenship_status" class="text-gray-700">Citizenship or Immigration Status</label>
+                                      </div>
+                                      <div class="flex items-center">
+                                          <input type="checkbox" id="ethnic_affiliation" class="mr-2" value="ethnic_affiliation" />
+                                          <label for="ethnic_affiliation" class="text-gray-700">Ethnic or Religious Affiliation</label>
+                                      </div>
+                                      <div class="flex items-center">
+                                          <input type="checkbox" id="email" class="mr-2" value="email" />
+                                          <label for="email" class="text-gray-700">Personal Email Address</label>
+                                      </div>
+                                      <div class="flex items-center">
+                                          <input type="checkbox" id="password" class="mr-2" value="password" />
+                                          <label for="password" class="text-gray-700">Account Passwords</label>
+                                      </div>
+                                      <div class="flex items-center">
+                                          <input type="checkbox" id="dob" class="mr-2" value="dob" />
+                                          <label for="dob" class="text-gray-700">Date of Birth</label>
+                                      </div>
+                                      <div class="flex items-center">
+                                          <input type="checkbox" id="other" class="mr-2" value="other" />
+                                          <label for="other" class="text-gray-700">Other (Enter custom details)</label>
+                                      </div>
+                                  </div>
+                                  <div id="otherPiiContainer" class="p-2 hidden">
+                                      <input type="text" id="otherPiiInput" class="w-full p-2 border rounded" placeholder="Enter custom PII category" />
+                                  </div>
+                              </div>
+                          </div>
+                      </div>
+                      
+          
+                  </div>
+          
+                  <button id="processButton" class="mt-4 bg-black text-white px-4 py-2 rounded w-full">Next</button>
+          
+                  
+                  <div id="processingState" class="hidden text-center mt-4">
+                      <p class="text-gray-600">Masking...</p>
+                      <div class="loader border-t-4 border-orange -500 rounded-full w-8 h-8 mx-auto animate-spin"></div>
+                  </div>
+          
+                  <div id="maskedFilesSection" class="hidden mt-4">
+                      <h2 class="text-lg font-semibold">Masked Files</h2>
+                      <ul id="maskedFilesList" class="mt-2 space-y-2"></ul>
+                      <button onclick="resetUpload()" class="mt-4 bg-black text-white px-4 py-2 rounded w-full">Upload More
+                          Files</button>
+                  </div>
+              </div>
+          <script>
+                  let fileInput = document.getElementById("fileInput");
+          let fileList = document.getElementById("fileList");
+          let processButton = document.getElementById("processButton");
+          let processingState = document.getElementById("processingState");
+          let maskedFilesSection = document.getElementById("maskedFilesSection");
+          let maskedFilesList = document.getElementById("maskedFilesList");
+          let maskingTypeDropdown = document.getElementById("maskingType");
+          let piiCategoryDropdown = document.getElementById("piiCategory");
+          let otherPiiInput = document.getElementById("otherPiiInput");
+          let dropdownsSection = document.getElementById("dropdownsSection");
+          
+          fileInput.addEventListener("change", function () {
+              fileList.innerHTML = '';
+              let selectedFileType = getSelectedFileType(fileInput.files);
+          
+              for (let file of fileInput.files) {
+                  let listItem = document.createElement("li");
+                  listItem.classList.add("flex", "justify-between", "items-center", "bg-gray-200", "p-2", "rounded");
+                  listItem.innerHTML = `<span>📁 ${file.name}</span> <button onclick="removeFile('${file.name}')">🗑</button>`;
+                  fileList.appendChild(listItem);
+              }
+          
+              updateMaskingTypeOptions(selectedFileType);
+              dropdownsSection.classList.remove("hidden");
+          
+              piiCategoryDropdown.addEventListener("change", function () {
+                  if (piiCategoryDropdown.value === 'other') {
+                      otherPiiInput.classList.remove("hidden");
+                  } else {
+                      otherPiiInput.classList.add("hidden");
+                  }
+              });
+          });
+          
+          function getSelectedFileType(files) {
+              let fileType = 'other';
+              for (let file of files) {
+                  if (file.name.match(/\.(jpg|jpeg|png|gif|mp4|mov|pdf)$/i)) {
+                      fileType = 'media';
+                  } else if (file.name.match(/\.(csv|xlsx|docx|txt)$/i)) {
+                      fileType = 'document';
+                  }
+              }
+              return fileType;
+          }
+          
+          function updateMaskingTypeOptions(fileType) {
+              maskingTypeDropdown.innerHTML = '';
+              if (fileType === 'media') {
+                  let options = [
+                      { value: 'blurring', text: 'Blurring' },
+                      { value: 'rectangular_box', text: 'Rectangular Bounding Box' }
+                  ];
+                  options.forEach(option => {
+                      let opt = document.createElement('option');
+                      opt.value = option.value;
+                      opt.textContent = option.text;
+                      maskingTypeDropdown.appendChild(opt);
+                  });
+              } else if (fileType === 'document') {
+                  let options = [
+                      { value: 'replacement', text: 'Replacement' },
+                      { value: 'size_preserving', text: 'Size-preserving replacement' },
+                      { value: 'named_replacement', text: 'Named/numbered replacement' }
+                  ];
+                  options.forEach(option => {
+                      let opt = document.createElement('option');
+                      opt.value = option.value;
+                      opt.textContent = option.text;
+                      maskingTypeDropdown.appendChild(opt);
+                  });
+              }
+          }
+          
+          function removeFile(fileName) {
+              let files = Array.from(fileInput.files);
+              files = files.filter(file => file.name !== fileName);
+              fileInput.files = new FileList(files);
+              fileList.innerHTML = '';  
+              files.forEach(file => {
+                  let listItem = document.createElement("li");
+                  listItem.classList.add("flex", "justify-between", "items-center", "bg-gray-200", "p-2", "rounded");
+                  listItem.innerHTML = `<span>📁 ${file.name}</span> <button onclick="removeFile('${file.name}')">🗑</button>`;
+                  fileList.appendChild(listItem);
+              });
+          }
+          
+          processButton.addEventListener("click", async function () {
+              processingState.classList.remove("hidden");
+              processButton.classList.add("hidden");
+          
+              let formData = new FormData();
+              for (let file of fileInput.files) {
+                  formData.append("file", file);
+              }
+          
+              let selectedMaskingType = maskingTypeDropdown.value;
+              let selectedPiiCategories = [];
+              document.querySelectorAll("#piiDropdownMenu input[type='checkbox']:checked").forEach(checkbox => {
+                  selectedPiiCategories.push(checkbox.value);
+              });
+          
+              if (selectedPiiCategories.includes('other') && otherPiiInput.value.trim() !== '') {
+                  selectedPiiCategories.push(otherPiiInput.value.trim());
+              }
+          
+              formData.append("masking_type", selectedMaskingType);
+              formData.append("pii_categories", JSON.stringify(selectedPiiCategories));
+          
+              try {
+                  let response = await fetch("http://127.0.0.1:5000/upload/", { method: "POST", body: formData });
+          
+                  if (response.ok) {
+                      let contentType = response.headers.get("Content-Type");
+          
+                      if (contentType.includes("application/json")) {
+                          let maskedFiles = await response.json();
+                          processingState.classList.add("hidden");
+                          maskedFilesSection.classList.remove("hidden");
+                          maskedFilesList.innerHTML = "";
+          
+                          maskedFiles.forEach(file => {
+                              let listItem = document.createElement("li");
+                              listItem.classList.add("flex", "justify-between", "items-center", "bg-gray-200", "p-2", "rounded");
+                              listItem.innerHTML = `<span>📁 ${file.name}</span>
+                                                    <a href="${file.url}" download class="text-orange -500">⬇ Download</a>
+                                                    <button onclick="previewFile('${file.url}')">👁 Preview</button>`;
+                              maskedFilesList.appendChild(listItem);
+                          });
+                      } else {
+                          let blob = await response.blob();
+                          let url = URL.createObjectURL(blob);
+                          let filename = response.headers.get("Content-Disposition")?.split("filename=")[1] || "masked_file";
+                          filename = filename.replace(/["']/g, "");
+          
+                          processingState.classList.add("hidden");
+                          maskedFilesSection.classList.remove("hidden");
+          
+                          let listItem = document.createElement("li");
+                          listItem.classList.add("flex", "justify-between", "items-center", "bg-gray-200", "p-2", "rounded");
+                          listItem.innerHTML = `<span>📁 ${filename}</span>
+                                                <a href="${url}" download="${filename}" class="text-orange -500">⬇ Download</a>
+                                                <button onclick="previewFile('${url}')">👁 Preview</button>`;
+                          maskedFilesList.appendChild(listItem);
+                      }
+                  } else {
+                      processingState.innerHTML = "<p class='text-red-500'>Error processing files!</p>";
+                  }
+              } catch (error) {
+                  processingState.innerHTML = "<p class='text-red-500'>Network error!</p>";
+                  console.log(error);
+              }
+          });
+          
+          function resetUpload() {
+              maskedFilesSection.classList.add("hidden");
+              processButton.classList.remove("hidden");
+              fileList.innerHTML = "";
+              fileInput.value = "";
+              dropdownsSection.classList.add("hidden");
+          }
+          
+          function previewFile(url) {
+              window.open(url, "_blank");
+          }
+          
+          document.getElementById("piiDropdownBtn").addEventListener("click", function () {
+              const dropdownMenu = document.getElementById("piiDropdownMenu");
+              const dropdownArrow = document.getElementById("piiDropdownArrow");
+              dropdownMenu.classList.toggle("hidden");
+              dropdownArrow.textContent = dropdownMenu.classList.contains("hidden") ? "▼" : "▲";
+          });
+          
+          document.getElementById("selectAll").addEventListener("change", function () {
+              const isChecked = this.checked;
+              const checkboxes = document.querySelectorAll("#piiDropdownMenu input[type='checkbox']");
+              checkboxes.forEach(checkbox => {
+                  checkbox.checked = isChecked;
+              });
+          });
+          
+          document.querySelectorAll("#piiDropdownMenu input[type='checkbox']").forEach(checkbox => {
+              checkbox.addEventListener("change", function () {
+                  const otherCheckbox = document.getElementById("other");
+                  const otherPiiContainer = document.getElementById("otherPiiContainer");
+          
+                  if (otherCheckbox.checked) {
+                      otherPiiContainer.classList.remove("hidden");
+                  } else {
+                      otherPiiContainer.classList.add("hidden");
+                  }
+          
+                  const selectAllCheckbox = document.getElementById("selectAll");
+                  const allChecked = Array.from(document.querySelectorAll("#piiDropdownMenu input[type='checkbox']"))
+                      .every(cb => cb.checked);
+                  selectAllCheckbox.checked = allChecked;
+              });
+          });
+          
+              </script>
+          </div> 
+            
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- Hero Area End -->
+
+    <!-- Services Section Start -->
+    <section id="services" class="py-24" bg="bg-orange-500">
+      <div class="container px-4">
+        <div class="text-center">
+          <h2 class="mb-12 text-4xl text-gray-700 font-bold tracking-wide">
+            Our Services – Tailored PII Masking for Every Format
+          </h2>
+        </div>
+        <img src="assets\img\abstract-paper-background-concept.jpg" class="curved-bg opacity-40" alt="Yellow Background">
+        <div class="flex flex-wrap">
+
+                  <!-- Services item -->
+                  <div class="w-full sm:w-1/2 md:w-1/2 lg:w-1/3">
+                    <div class="m-4">
+                      <div class="mb-4 text-orange -600 text-5xl">
+                        <i class="lni lni-shield"></i>
+                      </div>
+                      <div>
+                        <h3
+                          class="
+                            text-gray-800
+                            font-semibold
+                            text-lg
+                            block
+                            mb-3
+                            uppercase
+                          "
+                        >
+                          Image & Video Masking
+                        </h3>
+                        <p class="text-gray-600">
+                          For JPG, JPEG, PNG, GIF, MP4, and MOV files, you can choose:
+                          <br>✅ <b>Yellow Paint Masking</b> – Covers sensitive data with a solid yellow overlay.
+                          <br>✅ <b>Blur Masking</b> – Applies a soft blur to obscure PII while keeping content readable.
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                  <!-- Services item -->
+                  <div class="w-full sm:w-1/2 md:w-1/2 lg:w-1/3">
+                    <div class="m-4">
+                      <div class="mb-4 text-orange -600 text-5xl">
+                        <i class="lni lni-folder"></i>
+                      </div>
+                      <div>
+                        <h3
+                          class="
+                            text-gray-800
+                            font-semibold
+                            text-lg
+                            block
+                            mb-3
+                            uppercase
+                          "
+                        >
+                          Document & Data Masking
+                        </h3>
+                        <p class="text-gray-600">
+                          For PDF, CSV, XLSX, DOCX, and TXT files, we offer:
+                          <br>✅ <b>Name-Replacement Masking</b> – Replaces sensitive names with generic placeholders.
+                          <br>✅ <b>Size-Preserving Replacement Masking</b> – Replaces PII while maintaining character length.
+                          <br>✅ <b>General Replacement Masking</b> – Replaces PII with asterisks or predefined values.
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                  <!-- Services item -->
+                  <div class="w-full sm:w-1/2 md:w-1/2 lg:w-1/3">
+                    <div class="m-4">
+                      <div class="mb-4 text-orange -600 text-5xl">
+                        <i class="lni lni-cloud-upload"></i>
+                      </div>
+                      <div>
+                        <h3
+                          class="
+                            text-gray-800
+                            font-semibold
+                            text-lg
+                            block
+                            mb-3
+                            uppercase
+                          "
+                        >
+                          How It Works?
+                        </h3>
+                        <p class="text-gray-600">
+                          1️⃣ Upload your file.
+                          <br>2️⃣ Select the appropriate masking method.
+                          <br>3️⃣ Download your securely masked file.
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+        
+        </div>
+      </div>
+    </section>
+    <!-- Services Section End -->
+
+    <!-- Feature Section Start -->
+    <div id="feature" class="bg-orange-500 py-24">
+      <div class="container px-4">
+        <div class="flex flex-wrap items-center">
+          <div class="w-full lg:w-1/2">
+            <div class="mb-5 lg:mb-0">
+              <h2 class="mb-12 text-4xl text-gray-700 font-bold tracking-wide">
+                Learn More About the Tool
+              </h2>
+
+              <div class="flex flex-wrap">
+                <div class="w-full sm:w-1/2 lg:w-1/2">
+                  <div class="m-3">
+                    <div class="icon text-4xl text-orange -600 mb-3">
+                      <i class="lni lni-layers"> </i>
+                    </div>
+                    <div class="features-content">
+                      <h4 class="text-gray-800 font-medium block mb-3">
+                        Smart, Secure & Efficient PII Masking
+                      </h4>
+                      <p>
+                        🚀 Seamless File Processing<br>
+                        Upload and process multiple file formats effortlessly.<br>
+                        Supports both visual and text-based PII detection.
+                      </p>
+                    </div>
+                  </div>
+                </div>
+                <div class="w-full sm:w-1/2 lg:w-1/2">
+                  <div class="m-3">
+                    <div class="icon text-4xl text-orange -600 mb-3">
+                      <i class="lni lni-gift"> </i>
+                    </div>
+                    <div class="features-content">
+                      <h4 class="text-gray-800 font-medium block mb-3">
+                        🛡 Advanced Masking Techniques
+                      </h4>
+                      <p>                     
+                      Image & Video Masking: Yellow Paint & Blur Masking<br>
+                      Document Masking: Name Replacement, Size-Preserving, and General Replacement
+                      </p>
+                    </div>
+                  </div>
+                </div>
+                <div class="w-full sm:w-1/2 lg:w-1/2">
+                  <div class="m-3">
+                    <div class="icon text-4xl text-orange -600 mb-3">
+                      <i class="lni lni-bolt"> </i>
+                    </div>
+                    <div class="features-content">
+                      <h4 class="text-gray-800 font-medium block mb-3">
+                        ⚡ Lightning-Fast & Accurate
+                      </h4>
+                      <p>
+                        AI-powered PII detection ensures high accuracy.<br>
+                        Optimized for fast processing with minimal wait time.
+                      </p>
+                    </div>
+                  </div>
+                </div>
+                <div class="w-full sm:w-1/2 lg:w-1/2">
+                  <div class="m-3">
+                    <div class="icon text-4xl text-orange -600 mb-3">
+                      <i class="lni lni-folder"> </i>
+                    </div>
+                    <div class="features-content">
+                      <h4 class="text-gray-800 font-medium block mb-3">
+                        📂 Wide Format Support
+                      </h4>
+                      <p>
+                        Handles images, videos, PDFs, spreadsheets, and text files.<br>
+                        Works seamlessly across multiple industries.
+                      </p>
+                    </div>
+                  </div>
+                </div>
+                <div class="w-full sm:w-1/2 lg:w-1/2">
+                  <div class="m-3">
+                    <div class="icon text-4xl text-green-600 mb-3">
+                      <i class="lni lni-display"> </i>
+                    </div>
+                    <div class="features-content">
+                      <h4 class="text-gray-800 font-medium block mb-3">
+                        💻 User-Friendly Interface
+                      </h4>
+                      <p>
+                        Simple drag-and-drop upload.<br>
+                        Preview and customize masking before finalizing.
+                      </p>
+                    </div>
+                  </div>
+                </div>
+                <div class="w-full sm:w-1/2 lg:w-1/2">
+                  <div class="m-3">
+                    <div class="icon text-4xl text-green-600 mb-3">
+                      <i class="lni lni-lock"> </i>
+                    </div>
+                    <div class="features-content">
+                      <h4 class="text-gray-800 font-medium block mb-3">
+                        🔐 Privacy & Security Guaranteed
+                      </h4>
+                      <p>
+                        Your data is never stored or shared.<br>
+                        Secure processing ensures complete confidentiality.
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          </div>
+          <div class="w-full lg:w-1/2">
+            <div class="mx-3 lg:mr-0 lg:ml-3">
+              <img src="assets/img/feature/img-1.svg" alt="" />
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Feature Section End -->
+
+    
+
+    <!-- Pricing section Start -->
+    <section id="pricing" class="py-24">
+      <div class="container px-4">
+        <div class="flex flex-wrap justify-center md:justify-start">
+          <!-- single pricing table starts -->
+          <div class="w-3/4 sm:w-2/3 md:w-1/2 lg:w-1/3">
+            <div
+              class="
+                m-3
+                text-center
+                py-10
+                px-8
+                shadow
+                rounded
+                duration-300
+                hover:shadow-lg hover:bg-orange -100
+                wow
+                fadeInLeft
+              "
+            >
+              <div class="mb-3">
+                <h3 class="text-orange -600 font-bold uppercase text-sm">Basic</h3>
+              </div>
+              <div class="mb-5">
+                <p class="text-gray-700">
+                  <span class="font-bold text-2xl">$12.90</span>
+                  <span class="font-medium text-sm">/ Month</span>
+                </p>
+              </div>
+              <ul class="mb-16">
+                <li class="text-gray-500 leading-9">Up to 5 projects</li>
+                <li class="text-gray-500 leading-9">Up to 10 collabrators</li>
+                <li class="text-gray-500 leading-9">2gb of storage</li>
+              </ul>
+              <a
+                href="javascript:void(0)"
+                class="
+                  text-white
+                  bg-orange -600
+                  px-10
+                  py-3
+                  rounded-full
+                  duration-300
+                  hover:bg-orange -500
+                "
+                >Get It</a
+              >
+            </div>
+          </div>
+          <!-- single pricing table ends -->
+          <!-- single pricing table starts -->
+          <div class="w-3/4 sm:w-2/3 md:w-1/2 lg:w-1/3">
+            <div
+              class="
+                m-3
+                text-center
+                py-10
+                px-8
+                shadow
+                rounded
+                duration-300
+                hover:shadow-lg hover:bg-orange -100
+                bg-orange -100
+                wow
+                fadeInLeft
+              "
+            >
+              <div class="mb-3">
+                <h3 class="text-orange -600 font-bold uppercase text-sm">
+                  PROFESIONAL
+                </h3>
+              </div>
+              <div class="mb-5">
+                <p class="text-gray-700">
+                  <span class="font-bold text-2xl">$49.90</span>
+                  <span class="font-medium text-sm">/ Month</span>
+                </p>
+              </div>
+              <ul class="mb-16">
+                <li class="text-gray-500 leading-9">Up to 10 projects</li>
+                <li class="text-gray-500 leading-9">Up to 20 collabrators</li>
+                <li class="text-gray-500 leading-9">10gb of storage</li>
+                <li class="text-gray-500 leading-9">Real-time collabration</li>
+              </ul>
+              <a
+                href="javascript:void(0)"
+                class="
+                  text-white
+                  bg-orange -600
+                  px-10
+                  py-3
+                  rounded-full
+                  duration-300
+                  hover:bg-orange -500
+                "
+                >Get It</a
+              >
+            </div>
+          </div>
+          <!-- single pricing table ends -->
+          <!-- single pricing table starts -->
+          <div class="w-3/4 sm:w-2/3 md:w-1/2 lg:w-1/3">
+            <div
+              class="
+                m-3
+                text-center
+                py-10
+                px-8
+                shadow
+                rounded
+                duration-300
+                hover:shadow-lg hover:bg-orange -100
+              "
+            >
+              <div class="mb-3">
+                <h3 class="text-orange -600 font-bold uppercase text-sm">
+                  EXPERT
+                </h3>
+              </div>
+              <div class="mb-5">
+                <p class="text-gray-700">
+                  <span class="font-bold text-2xl">$89.90</span>
+                  <span class="font-medium text-sm">/ Month</span>
+                </p>
+              </div>
+              <ul class="mb-16">
+                <li class="text-gray-500 leading-9">unlimited projects</li>
+                <li class="text-gray-500 leading-9">Unlimited collabrators</li>
+                <li class="text-gray-500 leading-9">Unlimited of storage</li>
+                <li class="text-gray-500 leading-9">Real-time collabration</li>
+                <li class="text-gray-500 leading-9">24x7 Support</li>
+              </ul>
+              <a
+                href="javascript:void(0)"
+                class="
+                  text-white
+                  bg-orange -600
+                  px-10
+                  py-3
+                  rounded-full
+                  duration-300
+                  hover:bg-orange -500
+                "
+                >Get It</a
+              >
+            </div>
+          </div>
+          <!-- single pricing table ends -->
+        </div>
+      </div>
+    </section>
+    <!-- Pricing Table Section End -->
+
+    <!-- Subscribe Section Start -->
+    <section id="Subscribes" class="text-center py-20 bg-orange -100">
+      <div class="container px-4">
+        <div class="flex justify-center mx-3">
+          <div class="w-full sm:w-3/4 md:w-2/3 lg:w-1/2">
+            <h4 class="mb-3 text-4xl text-gray-700 font-bold tracking-wide">
+              Start For Free
+            </h4>
+            <p class="mb-4 text-gray-600 leading-loose text-sm">
+              Existing customized ideas through client-based deliverables.
+              <br />
+              Compellingly unleash fully tested outsourcing
+            </p>
+            <form for="">
+              <div class="wow fadeInDown">
+                <input
+                  type="Email"
+                  class="
+                    w-full
+                    mb-5
+                    bg-white
+                    border border-orange -300
+                    rounded-full
+                    px-5
+                    py-3
+                    duration-300
+                    focus:border-orange -600
+                    outline-none
+                  "
+                  name="email"
+                  placeholder="Email Address"
+                />
+                <button
+                  class="
+                    border-0
+                    bg-orange -600
+                    text-white
+                    rounded-full
+                    w-12
+                    h-12
+                    duration-300
+                    hover:opacity-75
+                  "
+                  type="submit"
+                >
+                  <i class="lni lni-arrow-right"> </i>
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- Subscribe Section End -->
+
+    <!-- Contact Section Start -->
+    <section id="contact" class="py-24">
+      <div class="container px-4">
+        <div class="text-center">
+          <h2 class="mb-12 text-4xl text-gray-700 font-bold tracking-wide">
+            Contact
+          </h2>
+        </div>
+
+        <div class="flex flex-wrap contact-form-area">
+          <div class="w-full md:w-1/2">
+            <div class="contact">
+              <h2 class="uppercase font-bold text-xl text-gray-700 mb-5 ml-3">
+                Contact Form
+              </h2>
+              <form id="contactForm" action="#0" method="POST">
+                <div class="flex flex-wrap">
+                  <div class="w-full sm:w-1/2 md:w-full lg:w-1/2">
+                    <div class="mx-3">
+                      <input
+                        type="text"
+                        class="form-input rounded-full"
+                        id="name"
+                        name="name"
+                        placeholder="Name"
+                        required
+                        data-error="Please enter your name"
+                      />
+                    </div>
+                  </div>
+                  <div class="w-full sm:w-1/2 md:w-full lg:w-1/2">
+                    <div class="mx-3">
+                      <input
+                        type="text"
+                        placeholder="Email"
+                        id="email"
+                        class="form-input rounded-full"
+                        name="email"
+                        required
+                        data-error="Please enter your email"
+                      />
+                    </div>
+                  </div>
+                  <div class="w-full">
+                    <div class="mx-3">
+                      <input
+                        type="text"
+                        placeholder="Subject"
+                        id="subject"
+                        name="subject"
+                        class="form-input rounded-full"
+                        required
+                        data-error="Please enter your subject"
+                      />
+                    </div>
+                  </div>
+                  <div class="w-full">
+                    <div class="mx-3">
+                      <textarea
+                        class="form-input rounded-lg"
+                        id="message"
+                        name="message"
+                        placeholder="Your Message"
+                        rows="5"
+                        data-error="Write your message"
+                        required
+                      >
+                      </textarea>
+                    </div>
+                  </div>
+                  <div class="w-full">
+                    <div class="submit-button mx-3">
+                      <button
+                        class="
+                          text-white
+                          bg-orange -600
+                          px-10
+                          py-3
+                          rounded-full
+                          duration-300
+                          hover:bg-orange -500
+                        "
+                        id="form-submit"
+                        type="submit"
+                      >
+                        Send Message
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+          
+                
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- Contact Section End -->
+
+
+    <!-- Footer Section Start -->
+    <footer id="footer" class="bg-gray-800 py-16">
+      <div class="container px-4">
+        <div class="flex flex-wrap">
+          <div class="w-full sm:w-1/2 md:w-1/2 lg:w-1/4">
+            <div class="mx-3 mb-8">
+              <div class="footer-logo mb-3">
+                <img src="assets/img/Ascentt_logo.png" alt="" />
+              </div>
+              <p class="text-gray-300">
+                Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+                Quisquam excepturi quasi, ipsam voluptatem.
+              </p>
+            </div>
+          </div>
+          <div class="w-full sm:w-1/2 md:w-1/2 lg:w-1/4">
+            <div class="mx-3 mb-8">
+              <h3 class="font-bold text-xl text-white mb-5">Company</h3>
+              <ul>
+                <li>
+                  <a
+                    href="javascript:void(0)"
+                    class="
+                      leading-9
+                      text-gray-100
+                      duration-300
+                      hover:text-orange -500
+                    "
+                  >
+                    Press Releases
+                  </a>
+                </li>
+                <li>
+                  <a
+                    href="javascript:void(0)"
+                    class="
+                      leading-9
+                      text-gray-100
+                      duration-300
+                      hover:text-orange -500
+                    "
+                    >Mission</a
+                  >
+                </li>
+                <li>
+                  <a
+                    href="javascript:void(0)"
+                    class="
+                      leading-9
+                      text-gray-100
+                      duration-300
+                      hover:text-orange -500
+                    "
+                    >Strategy</a
+                  >
+                </li>
+              </ul>
+            </div>
+          </div>
+          <div class="w-full sm:w-1/2 md:w-1/2 lg:w-1/4">
+            <div class="mx-3 mb-8">
+              <h3 class="font-bold text-xl text-white mb-5">About</h3>
+              <ul>
+                <li>
+                  <a
+                    href="javascript:void(0)"
+                    class="
+                      leading-9
+                      text-gray-100
+                      duration-300
+                      hover:text-orange -500
+                    "
+                  >
+                    Career
+                  </a>
+                </li>
+                <li>
+                  <a
+                    href="javascript:void(0)"
+                    class="
+                      leading-9
+                      text-gray-100
+                      duration-300
+                      hover:text-orange -500
+                    "
+                    >Team</a
+                  >
+                </li>
+                <li>
+                  <a
+                    href="javascript:void(0)"
+                    class="
+                      leading-9
+                      text-gray-100
+                      duration-300
+                      hover:text-orange -500
+                    "
+                    >Clients</a
+                  >
+                </li>
+              </ul>
+            </div>
+          </div>
+          <div class="w-full sm:w-1/2 md:w-1/2 lg:w-1/4">
+            <div class="mx-3 mb-8">
+              <h3 class="font-bold text-xl text-white mb-5">Find us on</h3>
+
+              <ul class="social-icons flex justify-start">
+                <li class="mr-4">
+                  <a
+                    href="javascript:void(0)"
+                    class="
+                      flex
+                      justify-center
+                      items-center
+                      w-8
+                      h-8
+                      bg-white
+                      rounded-full
+                      text-sm text-gray-700
+                      duration-300
+                      hover:text-white hover:bg-indigo-500
+                    "
+                  >
+                    <i class="lni lni-facebook-filled" aria-hidden="true"> </i>
+                  </a>
+                </li>
+                <li class="mr-4">
+                  <a
+                    href="javascript:void(0)"
+                    class="
+                      flex
+                      justify-center
+                      items-center
+                      w-8
+                      h-8
+                      bg-white
+                      rounded-full
+                      text-sm text-gray-700
+                      duration-300
+                      hover:text-white hover:bg-orange -400
+                    "
+                  >
+                    <i class="lni lni-twitter-filled" aria-hidden="true"> </i>
+                  </a>
+                </li>
+                <li class="mr-4">
+                  <a
+                    href="javascript:void(0)"
+                    class="
+                      flex
+                      justify-center
+                      items-center
+                      w-8
+                      h-8
+                      bg-white
+                      rounded-full
+                      text-sm text-gray-700
+                      duration-300
+                      hover:text-white hover:bg-red-500
+                    "
+                  >
+                    <i class="lni lni-instagram-filled" aria-hidden="true"> </i>
+                  </a>
+                </li>
+                <li class="mr-4">
+                  <a
+                    href="javascript:void(0)"
+                    class="
+                      flex
+                      justify-center
+                      items-center
+                      w-8
+                      h-8
+                      bg-white
+                      rounded-full
+                      text-sm text-gray-700
+                      duration-300
+                      hover:text-white hover:bg-indigo-600
+                    "
+                  >
+                    <i class="lni lni-linkedin-original" aria-hidden="true">
+                    </i>
+                  </a>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </footer>
+    <!-- Footer Section End -->
+
+    <!-- Go to Top Link -->
+    <a
+      href="#"
+      class="
+        back-to-top
+        w-10
+        h-10
+        fixed
+        bottom-0
+        right-0
+        mb-5
+        mr-5
+        flex
+        items-center
+        justify-center
+        rounded-full
+        bg-orange -600
+        text-white text-lg
+        z-20
+        duration-300
+        hover:bg-orange -400
+      "
+    >
+      <i class="lni lni-chevron-up"> </i>
+    </a>
+
+    <!-- All js Here -->
+    <script src="assets/js/main.js"></script>
+  </body>
+</html>
